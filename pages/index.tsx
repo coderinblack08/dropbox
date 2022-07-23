@@ -114,7 +114,7 @@ const LandingPage: NextPage = () => {
                 <a href="https://dropbox.com/register">
                   <Button>
                     Get Started{" "}
-                    <span className="text-blue-100">— It's Free</span>
+                    <span className="text-blue-100">— It&apos;s Free</span>
                   </Button>
                 </a>
               </li>
@@ -128,7 +128,7 @@ const LandingPage: NextPage = () => {
                 <span className="text-gray-500">moving, all in one place.</span>
               </h1>
               <p className="text-gray-500 max-w-lg text-base sm:text-lg mt-4">
-                Easy to use, reliable, private, and secure. It’s no wonder
+                Easy to use, reliable, private, and secure. It&apos;s no wonder
                 Dropbox is the choice for storing and sharing your most
                 important files.
               </p>
@@ -227,7 +227,7 @@ const LandingPage: NextPage = () => {
               />
               <Card
                 title="Send videos quickly"
-                description="Send your entire wedding video to family with a simple link. It’s easy to share large files with anyone — even if they don’t have a Dropbox account."
+                description="Send your entire wedding video to family with a simple link. It's easy to share large files with anyone — even if they don’t have a Dropbox account."
                 colorScheme="blue"
               />
               <Card

@@ -1,6 +1,6 @@
 # Slingshot Frontend Test (Dropbox Landing Page)
 
-> Project for [slingshotahead.com](https://slingshotahead.com)'s technical/specialization tests
+> Project for [slingshotahead.com](https://slingshotahead.com)'s technical/specialization test
 
 In this project, we're creating our own landing page for Dropbox.
 I mostly got the landing page content from older versions of Dropbox's landing pages using the
@@ -28,3 +28,5 @@ All the design work was done [here](https://www.figma.com/file/JIUadjF5wBsSc5GV9
 The website is deployed on Vercel.
 
 ## Video Demo
+
+https://vimeo.com/732807672
