@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "custom-cursor-react": "^1.0.5",
     "custom-dashed-border": "^0.1.1",
+    "gsap": "^3.10.4",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",

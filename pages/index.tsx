@@ -16,10 +16,8 @@ import { formatDate } from "../lib/formatDate";
 import { urlToFile } from "../lib/urlToFile";
 import { useDimensions } from "../lib/useDimensions";
 
-const pickRandomEmoji = () => {
-  const emojis = ["🤞", "🤝", "🤌", "🤙", "🤚"];
-  return emojis[Math.floor(Math.random() * emojis.length)];
-};
+import CustomCursor from "custom-cursor-react";
+import "custom-cursor-react/dist/index.css";
 
 const LandingPage: NextPage = () => {
   const { setBoxRef: setHeaderRef, dimensions: headerDimensions } =
@@ -52,13 +50,18 @@ const LandingPage: NextPage = () => {
 
   return (
     <div>
-      <style jsx global>{`
-        html {
-          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewport="0 0 72 72" style="fill:black;font-size:36px"><text y="50%">${pickRandomEmoji()}</text></svg>')
-              16 0,
-            auto;
-        }
-      `}</style>
+      <CustomCursor
+        targets={["a", "button"]}
+        customClass="custom-cursor"
+        dimensions={30}
+        fill="#000"
+        smoothness={{
+          movement: 0.2,
+          scale: 0.1,
+          opacity: 0.2,
+        }}
+        targetOpacity={0.5}
+      />
       <Head>
         <title>Dropbox</title>
       </Head>
@@ -92,7 +95,11 @@ const LandingPage: NextPage = () => {
         />
         <header>
           <nav className="flex items-center justify-between max-w-6xl mx-auto px-8 py-6">
-            <img src="dropbox.png" alt="Dropbox Logo" className="h-11 w-auto" />
+            <img
+              src="dropbox.png"
+              alt="Dropbox Logo"
+              className="h-9 sm:h-11 w-auto"
+            />
             <ul className="hidden sm:flex items-center space-x-5 text-gray-500">
               <li>
                 <a href="https://experience.dropbox.com/contact">Contact</a>
@@ -125,7 +132,7 @@ const LandingPage: NextPage = () => {
                 Dropbox is the choice for storing and sharing your most
                 important files.
               </p>
-              <a href="https://dropbox.com/plans">
+              <a className="inline-block" href="https://dropbox.com/plans">
                 <Button
                   className="mt-6"
                   color="gray"
@@ -194,16 +201,16 @@ const LandingPage: NextPage = () => {
           </div>
         </header>
         <Divider />
-        <div className="h-32" />
+        <div className="h-40" />
       </div>
       <main className="border-b-2">
         <div className="grid-paper py-16 -mt-0.5">
           <div className="flex flex-col items-center">
-            <img src="dropbox-paper.png" className="h-40 w-auto" />
-            <h2 className="text-4xl font-black text-blue-500 text-center mt-4">
+            <img src="dropbox-paper.png" className="h-32 sm:h-40 w-auto" />
+            <h2 className="text-3xl sm:text-4xl font-black text-blue-500 text-center mt-4">
               Dropbox works the way you do
             </h2>
-            <p className="text-blue-500 text-2xl text-center mt-2">
+            <p className="text-blue-500 text-xl sm:text-2xl text-center mt-2">
               Get to all your files from <u>anywhere</u>, on any <br /> device,
               and share them with <u>anyone</u>.
             </p>
