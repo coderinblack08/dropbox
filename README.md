@@ -15,6 +15,7 @@ All the design work was done [here](https://www.figma.com/file/JIUadjF5wBsSc5GV9
 - Next.js
 - Typescript
 - TailwindCSS
+- React Dropzone
 
 ## Setup Locally
 

@@ -1,9 +1,19 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { IconBolt, IconChevronRight } from "tabler-icons";
+import { useCallback, useEffect, useState } from "react";
+import {
+  IconBolt,
+  IconChevronRight,
+  IconCornerLeftUp,
+  IconStar,
+  IconUpload,
+} from "tabler-icons";
+import { useDropzone } from "react-dropzone";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Divider } from "../components/Divider";
+import { formatDate } from "../lib/formatDate";
+import { urlToFile } from "../lib/urlToFile";
 import { useDimensions } from "../lib/useDimensions";
 
 const pickRandomEmoji = () => {
@@ -16,6 +26,29 @@ const LandingPage: NextPage = () => {
     useDimensions<HTMLDivElement>();
   const { setBoxRef: setExampleRef, dimensions: exampleDimensions } =
     useDimensions<HTMLElement>();
+
+  const [files, setFiles] = useState<File[]>([]);
+
+  const initialState = async () => {
+    setFiles(
+      await Promise.all([
+        urlToFile("/cute-cat.jpeg", "jpeg"),
+        urlToFile("/cute-puppies.jpeg", "jpeg"),
+      ])
+    );
+  };
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    acceptedFiles.forEach((file) => {
+      setFiles((prev) => [...prev, file]);
+    });
+  }, []);
+
+  const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    initialState();
+  }, []);
 
   return (
     <div>
@@ -112,7 +145,50 @@ const LandingPage: NextPage = () => {
                   <button className="inline-flex items-center justify-center rounded-full bg-amber-500 h-3 w-3 text-amber-800"></button>
                   <button className="inline-flex items-center justify-center rounded-full bg-green-500 h-3 w-3 text-green-800"></button>
                 </div>
-                <div className="h-[30rem]"></div>
+                <div className="flex flex-col h-[30rem]">
+                  <div className="p-3 border-b-2 flex items-center justify-between select-none">
+                    <div className="flex items-center space-x-2">
+                      <img src="folder.svg" className="h-8" />
+                      <h4 className="text-gray-500 font-semibold">All Files</h4>
+                    </div>
+                    <Button
+                      onClick={open}
+                      color="white"
+                      leftIcon={<IconUpload size={20} />}
+                    >
+                      Upload
+                    </Button>
+                  </div>
+                  <ul>
+                    {files.map((file, index) => (
+                      <li key={index}>
+                        <div className="p-4 border-b-2 w-full flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <img src="file.svg" className="h-7" />
+                            <span className="text-gray-500 font-semibold">
+                              {file.name}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <button className="text-gray-300">
+                              <IconStar size={24} />
+                            </button>
+                            <span className="text-gray-500">
+                              {formatDate(new Date(file.lastModified))}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div {...getRootProps()} className="h-full">
+                    <div className="p-4 text-gray-400">
+                      <IconCornerLeftUp className="inline mr-2 -mt-2" />
+                      Drag files in here to test it out!
+                    </div>
+                    <input {...getInputProps()} />
+                  </div>
+                </div>
               </article>
             </aside>
           </div>
