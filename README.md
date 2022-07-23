@@ -22,3 +22,9 @@ All the design work was done [here](https://www.figma.com/file/JIUadjF5wBsSc5GV9
 - Run `git clone` or download the code as a zip from GitHub
 - Run `yarn install` to download required dependencies
 - Finally, run `yarn dev` and access the website on `localhost:3000`
+
+## Deployment
+
+The website is deployed on Vercel.
+
+## Video Demo
