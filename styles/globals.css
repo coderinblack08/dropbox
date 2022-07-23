@@ -8,4 +8,10 @@
   #__next {
     @apply antialiased text-gray-900 font-medium;
   }
+
+  .grid-paper {
+    background-size: 24px 24px;
+    background-image: linear-gradient(to right, #e2f1ff 2px, transparent 2px),
+      linear-gradient(to bottom, #e2f1ff 2px, transparent 2px);
+  }
 }

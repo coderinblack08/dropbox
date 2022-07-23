@@ -1,55 +1,14 @@
-import { CustomDashedBorder } from "custom-dashed-border";
 import { NextPage } from "next";
 import Head from "next/head";
-import { CSSProperties, useEffect, useState } from "react";
-import { IconChevronRight } from "tabler-icons";
+import { IconBolt, IconChevronRight } from "tabler-icons";
 import { Button } from "../components/Button";
+import { Card } from "../components/Card";
+import { Divider } from "../components/Divider";
+import { useDimensions } from "../lib/useDimensions";
 
-const Divider: React.FC<{
-  className?: string;
-  vertical?: boolean;
-  style?: CSSProperties;
-}> = ({ className, vertical, style }) => (
-  <div className={`relative ${className}`} style={style}>
-    <CustomDashedBorder
-      bottom={
-        vertical
-          ? undefined
-          : { color: "#e5e7eb", stripe: 16, spacing: 6, height: 2 }
-      }
-      left={
-        vertical
-          ? { color: "#e5e7eb", stripe: 16, spacing: 6, width: 2 }
-          : undefined
-      }
-    />
-  </div>
-);
-
-const useDimensions = <T extends HTMLElement = HTMLDivElement>() => {
-  const [boxRef, setBoxRef] = useState<T | null>(null);
-  const [dimensions, setDimensions] = useState({
-    x: 0,
-    y: 0,
-    height: 0,
-    width: 0,
-  });
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (boxRef) {
-        const { x, width, y, height } = boxRef.getBoundingClientRect();
-        setDimensions({ x, width, y, height });
-      }
-    };
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions, true);
-    return () => {
-      window.removeEventListener("resize", updateDimensions, true);
-    };
-  }, [boxRef]);
-
-  return { boxRef, setBoxRef, dimensions };
+const pickRandomEmoji = () => {
+  const emojis = ["🤞", "🤝", "🤌", "🤙", "🤚"];
+  return emojis[Math.floor(Math.random() * emojis.length)];
 };
 
 const LandingPage: NextPage = () => {
@@ -60,6 +19,13 @@ const LandingPage: NextPage = () => {
 
   return (
     <div>
+      <style jsx global>{`
+        html {
+          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewport="0 0 72 72" style="fill:black;font-size:36px"><text y="50%">${pickRandomEmoji()}</text></svg>')
+              16 0,
+            auto;
+        }
+      `}</style>
       <Head>
         <title>Dropbox</title>
       </Head>
@@ -126,13 +92,15 @@ const LandingPage: NextPage = () => {
                 Dropbox is the choice for storing and sharing your most
                 important files.
               </p>
-              <Button
-                className="mt-6"
-                color="gray"
-                rightIcon={<IconChevronRight />}
-              >
-                Find your plan
-              </Button>
+              <a href="https://dropbox.com/plans">
+                <Button
+                  className="mt-6"
+                  color="gray"
+                  rightIcon={<IconChevronRight />}
+                >
+                  Find your plan
+                </Button>
+              </a>
             </div>
             <aside className="py-4 mt-8 lg:mt-0 max-w-2xl lg:max-w-[30rem] w-full">
               <article
@@ -150,8 +118,80 @@ const LandingPage: NextPage = () => {
           </div>
         </header>
         <Divider />
-        <div className="h-24" />
+        <div className="h-32" />
       </div>
+      <main className="border-b-2">
+        <div className="grid-paper py-16 -mt-0.5">
+          <div className="flex flex-col items-center">
+            <img src="dropbox-paper.png" className="h-40 w-auto" />
+            <h2 className="text-4xl font-black text-blue-500 text-center mt-4">
+              Dropbox works the way you do
+            </h2>
+            <p className="text-blue-500 text-2xl text-center mt-2">
+              Get to all your files from <u>anywhere</u>, on any <br /> device,
+              and share them with <u>anyone</u>.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto px-8 mt-16">
+              <Card
+                title="Take your docs anywhere"
+                description="Save files on your computer, then access them on your phone from the road. Everything you keep in Dropbox is synced automatically to all your devices."
+                colorScheme="violet"
+              />
+              <Card
+                title="Send videos quickly"
+                description="Send your entire wedding video to family with a simple link. It’s easy to share large files with anyone — even if they don’t have a Dropbox account."
+                colorScheme="blue"
+              />
+              <Card
+                title="Keep your photos safe"
+                description="Back up vacation photos automatically from your phone or computer. That way, memories are safe as soon as you make them, and you can relive them from any device."
+                colorScheme="red"
+              />
+              <Card
+                title="Work on slides together"
+                description="Edit a presentation with teammates without emailing files back and forth. When you edit a file in a shared folder, everyone gets the update automatically."
+                colorScheme="green"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer className="px-8 py-32">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-4xl font-black">
+            Get Started{" "}
+            <u className="text-blue-500 decoration-wavy underline-offset-4">
+              For Free
+            </u>
+          </h2>
+          <p className="text-gray-500 text-lg mt-2">
+            2GB of storage + Safe and reliable backups + File sharing
+          </p>
+          <form className="flex flex-col gap-3 mt-8">
+            <input
+              className="border-2 px-4 py-2 bg-white rounded-xl"
+              type="text"
+              placeholder="Full Name"
+            />
+            <input
+              className="border-2 px-4 py-2 bg-white rounded-xl"
+              type="text"
+              placeholder="Email Address"
+            />
+            <input
+              className="border-2 px-4 py-2 bg-white rounded-xl"
+              type="text"
+              placeholder="Password"
+            />
+            <Button
+              leftIcon={<IconBolt size={24} />}
+              className="!rounded-xl justify-center"
+            >
+              Sign up for free
+            </Button>
+          </form>
+        </div>
+      </footer>
     </div>
   );
 };
