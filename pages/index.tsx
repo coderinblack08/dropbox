@@ -51,7 +51,7 @@ const LandingPage: NextPage = () => {
   return (
     <div>
       <CustomCursor
-        targets={["a", "button"]}
+        targets={["a", "button", "h1", "h2"]}
         customClass="custom-cursor"
         dimensions={30}
         fill="#000"
@@ -60,7 +60,7 @@ const LandingPage: NextPage = () => {
           scale: 0.1,
           opacity: 0.2,
         }}
-        targetOpacity={0.5}
+        targetOpacity={0.4}
       />
       <Head>
         <title>Dropbox</title>
@@ -76,7 +76,7 @@ const LandingPage: NextPage = () => {
         />
         <Divider
           style={{ left: `calc(${headerDimensions.x}px - 1rem)` }}
-          className="!absolute inset-y-0 hidden lg:block"
+          className="!absolute inset-y-0 hidden lg:block z-50"
           vertical
         />
         <Divider
@@ -90,7 +90,7 @@ const LandingPage: NextPage = () => {
           style={{
             left: `calc(${exampleDimensions.x}px + ${exampleDimensions.width}px + 1rem)`,
           }}
-          className="!absolute inset-y-0 hidden lg:block"
+          className="!absolute inset-y-0 hidden lg:block z-50"
           vertical
         />
         <header>
@@ -201,7 +201,12 @@ const LandingPage: NextPage = () => {
           </div>
         </header>
         <Divider />
-        <div className="h-40" />
+        <div className="p-8 max-w-6xl mx-auto bg-gray-50 relative z-40">
+          <h3 className="text-gray-400 font-semibold text-lg">
+            Integrate with your favorite tools
+          </h3>
+          <img src="integrations.png" className="grayscale h-12 mt-4" />
+        </div>
       </div>
       <main className="border-b-2">
         <div className="grid-paper py-16 -mt-0.5">
