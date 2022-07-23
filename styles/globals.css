@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer {
+  html,
+  body,
+  #__next {
+    @apply antialiased text-gray-900 font-medium;
+  }
+}
